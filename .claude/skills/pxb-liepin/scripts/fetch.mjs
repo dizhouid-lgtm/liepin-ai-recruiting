@@ -11,7 +11,7 @@ if (!ids.length) { console.error('用法: node fetch.mjs <resume_id...>'); proce
 for (let k = 0; k < ids.length; k++) {
   const id = ids[k];
   let r;
-  try { r = liepinJson(['resume', id], { open: '{' }); }
+  try { r = liepinJson(['resume', id], { open: '{', timeoutMs: 150000 }); }  // 2.5min:单份应很快,超了即异常
   catch (e) { console.error(`\n第 ${k + 1}/${ids.length} 份(${id})失败,停手:\n` + e.message); process.exit(1); }
 
   const pick = (o, ks) => Object.fromEntries(ks.map(k => [k, o[k]]));

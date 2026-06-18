@@ -9,7 +9,7 @@ const [csv, query, ...flags] = process.argv.slice(2);
 if (!csv || !query) { console.error('用法: node search.mjs <csv> "<关键词>" [--city .. --limit .. --experience .. --salary .. --degree ..]'); process.exit(2); }
 
 let raw;
-try { raw = liepinJson(['search', JSON.stringify(query), ...flags], { open: '[' }); }
+try { raw = liepinJson(['search', JSON.stringify(query), ...flags], { open: '[', timeoutMs: 360000 }); }  // 6min:自动翻页给宽
 catch (e) { console.error('搜索失败,停手；看报错:\n' + e.message); process.exit(1); }
 
 const rows = readLedger(csv);
