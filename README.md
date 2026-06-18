@@ -27,6 +27,12 @@
 > ⚠️ 第 4 步是真门槛:没有猎聘招聘者账号，后面跑不起来。
 > mac/Linux 把反斜杠换正斜杠;设环境变量用 `KEY=值 命令` 或 `export KEY=值`。脚本本身跨平台。
 
+> **(可选但推荐)无头安全网**:本工作区的脚本已强制无头,正常不会弹浏览器。但若 AI 偶尔绕过脚本裸敲 `liepin`,npm 发布版默认会弹有头窗口。跑一次下面的补丁,把发布版默认也改成无头(login 仍可有头扫码),从根上免疫:
+> ```bash
+> node .claude/skills/pxb-liepin/scripts/patch-headless.mjs
+> ```
+> `npm update @viyzhu/liepin-cli` 会覆盖补丁,更新后重跑一次即可(幂等)。
+
 装完自检(不需登录)——能打印计数、能占锁又释放即就绪:
 ```bash
 node .claude/skills/pxb-liepin/scripts/dedup.mjs stats _共享/模板/去重台账模板.csv
@@ -86,4 +92,5 @@ pixboom-recruiting/
 | 脚本报"定位 @viyzhu/liepin-cli 失败" | 同上;`pdf.mjs` 靠 `npm root -g` 找包 |
 | 搜索/拉简历非零退出 | 多半反爬或被踢:停手、别连刷、重登 `liepin login`，降低频率 |
 | 出 PDF 存成登录页 | 账号被踢，重登后再出 |
+| 搜人/精筛时弹有头浏览器 | AI 绕过脚本裸调了 `liepin`，或没先登录。让它只用 `scripts/*.mjs`;并跑一次 `patch-headless.mjs` 当安全网 |
 | 多对话/多岗同时搜 | 不支持并发:单账号单锁，靠 `_共享/搜索队列.md` 排队 |
