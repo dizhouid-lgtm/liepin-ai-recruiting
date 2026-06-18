@@ -16,8 +16,10 @@ for (let k = 0; k < ids.length; k++) {
 
   const pick = (o, ks) => Object.fromEntries(ks.map(k => [k, o[k]]));
   console.log('==== ' + id + ' ====');
+  // 字段须与 liepin resume 实际输出对齐:有 city/current_company/education/want_salary/work_status/
+  // want_title/work_history/self_descr;没有 experience(经验在 work_history 里)。
   console.log(JSON.stringify(
-    pick(r, ['name', 'current_company', 'experience', 'want_salary', 'education', 'work_history', 'self_descr']),
+    pick(r, ['name', 'city', 'current_company', 'education', 'want_salary', 'work_status', 'want_title', 'work_history', 'self_descr']),
     null, 1));
   if (k < ids.length - 1) await sleep(jitter(4000, 11000)); // 反爬抖动 4-11s
 }
