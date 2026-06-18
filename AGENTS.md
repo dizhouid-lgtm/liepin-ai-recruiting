@@ -15,7 +15,13 @@
 - **机械活已脚本化,与工具无关**:所有 liepin 调用、去重、出 PDF 都通过 `.claude/skills/pxb-liepin/scripts/*.mjs`(Node,跨平台)。你只需按 SKILL 里给的 `node SC/xxx.mjs ...` 命令调用并读其输出。
 - **路径**:命令里的相对路径相对工作区根目录;脚本目录 `SC = .claude/skills/pxb-liepin/scripts/`。
 
+## 开干前必做:确认登录(首跑/换机/被踢的头号坑)
+搜任何人**之前**先确认这台机器已登录猎聘——登录要扫码,是**用户动作**,你/子代理代劳不了。没登录就开干,liepin 会撞登录页弹出有头浏览器、你扫不了码,就出现"弹浏览器又关掉"。
+- 没登录/不确定 → 让用户跑 `LIEPIN_HEADLESS=false liepin login`(PowerShell:`$env:LIEPIN_HEADLESS='false'; liepin login`)扫码,确认成功**再**开干。
+- 你/子代理**永不**跑 `liepin login`、永不开有头浏览器;全程无头,**过程中不该弹任何窗口**,弹了=没登录或无头失效,停手排查。
+- 开搜时告诉用户**每轮约 10–20 分钟**(单账号串行+反爬抖动),别让他以为卡死。
+
 ## 红线(同 SKILL,任何工具都不许破)
-单账号串行绝不并发调 liepin · 脚本非零退出即停 · 原始 JSON 不进上下文 · 简历只存本地不外发 · 只 `search`/`resume` 不 `greet`。
+单账号串行绝不并发调 liepin · 全程无头不弹窗 · 脚本非零退出即停 · 原始 JSON 不进上下文 · 简历只存本地不外发 · 只 `search`/`resume` 不 `greet`。
 
 > 环境安装见仓库根 `README.md`。

@@ -8,6 +8,10 @@ import path from 'path';
 import { existsSync, mkdirSync } from 'fs';
 import { execSync } from 'child_process';
 
+// 无头硬执行:在加载 CdpBrowser 前锁死,CdpBrowser 启动时即读到,绝不弹有头窗口。
+// (page.pdf() 也只在无头下可用。被踢只会存成登录页,不该开有头让人扫码——登录是另一条独立命令。)
+process.env.LIEPIN_HEADLESS = 'true';
+
 // 跨平台 + 跨用户:动态解析全局 npm 安装的 liepin-cli dist,不写死任何用户名路径。
 let pkgRoot;
 try {
