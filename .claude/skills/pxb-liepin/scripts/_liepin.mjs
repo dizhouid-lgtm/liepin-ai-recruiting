@@ -6,7 +6,8 @@ import { spawnSync } from 'child_process';
 // timeoutMs:硬超时——liepin 卡住(撞反爬/滑块/未登录/Chrome 卡死)就强杀并抛错,
 //   绝不让脚本无限阻塞(否则 subagent 与主 agent 会双双静默挂死)。
 export function liepinJson(args, { open = '[', timeoutMs = 360000 } = {}) {
-  const r = spawnSync('liepin', args, {
+  // 必须带 --json:否则 liepin 走人类可读/交互模式,输出无法解析、甚至会挂起干等(卡死主因)。
+  const r = spawnSync('liepin', [...args, '--json'], {
     shell: true, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024,
     timeout: timeoutMs, killSignal: 'SIGKILL',
     env: { ...process.env, LIEPIN_HEADLESS: 'true' },
