@@ -64,6 +64,8 @@ node .claude/skills/pxb-liepin/scripts/lock.mjs acquire 自检 && node .claude/s
 
 > 想自己先建好岗位文件夹也行:复制 `_共享/模板/` 三件到新文件夹(改名),建空 `待定/`,照 `JD模板.md` 填(公司素材见 `CLAUDE.md`)。
 
+> 🔄 **本工作区还在持续迭代**,每次用之前先 `git pull` 拉最新(AI 也会在开工前自动检查更新)。你的岗位数据是本地未跟踪文件,`git pull` 不会动。
+
 ## 文件结构
 ```
 pixboom-recruiting/

@@ -4,6 +4,7 @@
 //   node dedup.mjs seen  <csv>                  打印已收录的 resume_id(每行一个),供搜索去重
 //   node dedup.mjs add   <csv> <id...>          新 id 登记为「未精筛」(已存在的跳过),整表重写
 //   node dedup.mjs set   <csv> <状态> <id...>   把这些 id 改成指定状态
+//   node dedup.mjs list  <csv> <状态>           打印某状态的全部 resume_id(回扫错杀/复判库存用)
 //   node dedup.mjs stats <csv>                  打印各状态计数 + 未精筛:精筛 比(健康≈4:1)
 import { readLedger, writeLedger } from './_csv.mjs';
 
@@ -31,6 +32,11 @@ if (cmd === 'seen') {
   for (const r of rows) if (target.has(r.resume_id)) { r.status = status; n++; }
   writeLedger(csv, rows);
   console.log(`${n} 条改为「${status}」`);
+
+} else if (cmd === 'list') {
+  const [status] = rest;
+  if (!STATUSES.includes(status)) { console.error(`状态须是: ${STATUSES.join(' / ')}`); process.exit(2); }
+  for (const r of readLedger(csv)) if (r.status === status) console.log(r.resume_id);
 
 } else if (cmd === 'stats') {
   const rows = readLedger(csv);
