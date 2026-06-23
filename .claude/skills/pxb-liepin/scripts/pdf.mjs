@@ -35,24 +35,37 @@ if (outDir) { mkdirSync(outDir, { recursive: true }); }
 else { outDir = [path.join(os.homedir(), 'OneDrive', 'Desktop'), path.join(os.homedir(), 'Desktop')].find(existsSync) || path.join(os.homedir(), 'Desktop'); }
 const base = 'https://lpt.liepin.com/cvview/showresumedetail?resIdEncode=';
 
-const MARKERS = ['求职意向', '工作经历', '工作经验', '教育经历', '自我评价']; // 简历页特有内容,出现即算渲染好
-const MIN_OK = 100 * 1024;   // < 100KB ≈ 错误页/中间态(正常简历 PDF 远大于此)
+const SMALL_PDF = 100 * 1024; // <100KB 大概率是错误页
 
-// 渲染一份:导航 → 等真实内容 → 校验登录 → 截 PDF,返回文件字节数(登录页返回 0)。
-async function renderOne(page, id, out) {
+async function renderOne(page, id, out, attempt = 1) {
   await page.goto(base + id, { waitUntil: 'networkidle2' });
-  let contentOk = true;
+  // cvview 页会先显示"当前页面出现错误"然后 JS 重定向到 resume/detail,
+  // networkidle2 在重定向前就触发了。等 URL 变成 resume/detail 再继续。
   try {
     await page.waitForFunction(
-      (ms) => ms.some(m => document.body.innerText.includes(m)),
-      { timeout: 15000, polling: 500 }, MARKERS);
-  } catch { contentOk = false; }
-  const txt = await page.evaluate(() => document.body.innerText.slice(0, 80));
-  if (/登录|登陆|扫码/.test(txt)) { console.log(`⚠️ ${id} 疑似未登录(存成登录页),账号可能被踢`); return 0; }
-  if (!contentOk) console.log(`⚠️ ${id} 15s 内没等到简历内容(可能错误页/加载慢)`);
-  await sleep(1000); // 内容出现后再稳一下,等图片/布局
+      () => window.location.href.includes('resume/detail'),
+      { timeout: 10000, polling: 300 });
+  } catch { /* 可能直接就在 detail 页了 */ }
+  // URL 到位后等 React 异步渲染出简历内容
+  try {
+    await page.waitForFunction(
+      () => ['求职意向','工作经历','教育经历','自我评价'].some(m => document.body.innerText.includes(m)),
+      { timeout: 10000, polling: 500 });
+  } catch {
+    const txt = await page.evaluate(() => document.body.innerText.slice(0, 120));
+    if (/登录|登陆|扫码/.test(txt)) { console.log(`⚠️ ${id} 疑似未登录,账号可能被踢`); return 0; }
+    console.log(`⚠️ ${id} 等不到简历内容,仍尝试截 PDF`);
+  }
+  await sleep(1500);
+  await page.emulateMediaType('screen');
   await page.pdf({ path: out, format: 'A4', printBackground: true });
-  return statSync(out).size;
+  const size = statSync(out).size;
+  if (size < SMALL_PDF && attempt === 1) {
+    console.log(`⚠️ ${id} PDF 仅 ${Math.round(size/1024)}KB,重试…`);
+    await sleep(2000);
+    return renderOne(page, id, out, 2);
+  }
+  return size;
 }
 
 const b = new CdpBrowser();
@@ -60,15 +73,9 @@ try {
   const page = await b.launch();
   for (const { id, label } of items) {
     const out = path.join(outDir, `简历_${label}.pdf`);
-    let size = await renderOne(page, id, out);
-    if (size > 0 && size < MIN_OK) {           // 疑似错误页,重试一次
-      console.log(`⚠️ ${label} PDF 仅 ${Math.round(size / 1024)}KB,疑似错误页,重试一次…`);
-      await sleep(2000);
-      size = await renderOne(page, id, out);
-    }
+    const size = await renderOne(page, id, out);
     if (size === 0) { /* 登录页,已 warn */ }
-    else if (size < MIN_OK) console.log(`❌ ${label} 重试后仍仅 ${Math.round(size / 1024)}KB,请人工核对该 PDF`);
-    else console.log(`✓ 已存 ${out} (${Math.round(size / 1024)}KB)`);
+    else console.log(`已存 ${out} (${Math.round(size / 1024)}KB)`);
     await sleep(1500 + Math.floor(Math.random() * 2000)); // 抖动
   }
 } catch (e) { console.log('ERR:', e?.message || e); }
