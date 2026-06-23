@@ -1,5 +1,9 @@
 # Pixboom 招聘工作区
 
+[![license](https://img.shields.io/github/license/dizhouid-lgtm/pixboom-recruiting)](LICENSE)
+[![release](https://img.shields.io/github/v/release/dizhouid-lgtm/pixboom-recruiting)](https://github.com/dizhouid-lgtm/pixboom-recruiting/releases)
+[![stars](https://img.shields.io/github/stars/dizhouid-lgtm/pixboom-recruiting?style=social)](https://github.com/dizhouid-lgtm/pixboom-recruiting/stargazers)
+
 > **一句话**：AI 替你翻完海量简历、做完粗筛，把一小叠值得细看的人送到你面前；最懂这个岗的你，只做"谁真的对"这一个判断。每看一批，JD 跟着你的反馈再磨一遍，越搜越贴近你心里那个人。
 
 招过人的都懂两种累。一种是把筛人交给不懂这岗的人，递上来一摞看着像、聊起来全不沾边的简历。另一种是你自己埋进几百份里一份份翻，翻到第八十份眼睛就麻了，真正的好苗子没准就漏在你走神的那几屏。
