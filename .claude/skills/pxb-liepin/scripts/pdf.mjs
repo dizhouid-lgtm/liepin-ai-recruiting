@@ -5,6 +5,7 @@
 // 注意:① page.pdf() 仅无头可用,别设 LIEPIN_HEADLESS=false;② 占用 liepin profile,别和搜索/看简历 Chrome 同时跑;③ 需账号在线(被踢会存成登录页)。
 // 渲染:简历页(cvview→resume/detail 重定向 + React/Vue 异步渲染)不能用固定 sleep 就截,
 //      必须等到真实简历内容出现再 pdf,否则截到中间态/错误页(表现为所有 PDF 都 ~68KB 一致)。
+//      另:截前要点开所有"展开",否则个人介绍/工作描述等折叠内容会被截断(见 expandAll)。
 import os from 'os';
 import path from 'path';
 import { existsSync, mkdirSync, statSync } from 'fs';
@@ -63,11 +64,28 @@ async function pollResumeReady(page, id, timeoutMs = 15000) {
   return 'timeout';
 }
 
+// 点开页面上所有"展开"折叠(个人介绍、工作描述等),否则 PDF 截到折叠态、内容被截断。
+async function expandAll(page) {
+  try {
+    const n = await page.evaluate(() => {
+      const KEYS = ['展开', '展开全部', '查看全部', '查看更多'];
+      let c = 0;
+      for (const el of document.querySelectorAll('a, span, button, i, em')) {
+        if (el.childElementCount !== 0) continue;            // 只点叶子,避免父子都点导致再折叠
+        if (KEYS.includes((el.textContent || '').trim())) { try { el.click(); c++; } catch {} }
+      }
+      return c;
+    });
+    if (n) await sleep(1200); // 等展开内容渲染完
+  } catch { /* 重定向/重渲染偶发 context 销毁,忽略 */ }
+}
+
 async function renderOne(page, id, out, attempt = 1) {
   await page.goto(base + id, { waitUntil: 'networkidle2' }).catch(() => {});
   const state = await pollResumeReady(page, id);
   if (state === 'login') { console.log(`⚠️ ${id} 疑似未登录,账号可能被踢,先 \`liepin login\``); return 0; }
   if (state === 'timeout') console.log(`⚠️ ${id} 15s 内没等到简历内容,仍尝试截 PDF`);
+  await expandAll(page); // 点开"展开",否则个人介绍等折叠内容会被截断
   await sleep(2500); // 内容出现后再 settle,等图片/布局稳定(debug 实测固定等待是关键)
   await page.emulateMediaType('screen');
   await page.pdf({ path: out, format: 'A4', printBackground: true });
