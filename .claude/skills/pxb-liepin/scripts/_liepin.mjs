@@ -4,7 +4,7 @@ import { spawnSync } from 'child_process';
 // 跑一条 liepin 命令,返回 stdout 里第一个 JSON(数组或对象)。失败抛错(由调用方停手)。
 // liepin 输出前常有非 JSON 前导,故从首个 '['/'{' 起截取(替原 PS 的 IndexOf 技巧)。
 // timeoutMs:硬超时——liepin 卡住(撞反爬/滑块/未登录/Chrome 卡死)就强杀并抛错,
-//   绝不让脚本无限阻塞(否则 subagent 与主 agent 会双双静默挂死)。
+//   绝不让脚本无限阻塞(否则 agent 会静默挂死、用户长时间看不到任何反馈)。
 export function liepinJson(args, { open = '[', timeoutMs = 360000 } = {}) {
   // 必须带 --json:否则 liepin 走人类可读/交互模式,输出无法解析、甚至会挂起干等(卡死主因)。
   const r = spawnSync('liepin', [...args, '--json'], {

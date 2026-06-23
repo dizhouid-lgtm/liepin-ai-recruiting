@@ -54,7 +54,7 @@ node .claude/skills/pxb-liepin/scripts/lock.mjs acquire 自检 && node .claude/s
 1. 用该工具打开本文件夹。
 2. 入口是根目录 **`AGENTS.md`**(Codex/Cursor/部分 Copilot 会自动读;不自动读的，首条消息让它"先读 AGENTS.md 和那两份 SKILL.md")。
 3. `AGENTS.md` 指引它把 `pxb-liepin/SKILL.md`(主流程) + `liepin-cli/SKILL.md`(命令) 当作业手册。
-4. **降级点**:若该工具没有子代理，SKILL 里"派 subagent 跑小循环"由它自己串行跑——逻辑不变(本就单账号串行)。
+4. **串行执行**:整个流程单账号、单锁、串行,AI 自己从头跑到尾、不用子代理(子代理无并行收益、还更易卡死)；它每轮报一行进度。
 
 ## 快速开始：第一次搜人
 你只需开口,**JD、建文件夹、登录都交给 AI 引导**:
