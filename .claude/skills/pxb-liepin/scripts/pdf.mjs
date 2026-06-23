@@ -30,40 +30,52 @@ const { sleep } = await import(`${pkg}/common/utils.js`);
 const items = process.argv.slice(2).map(a => { const [id, ...l] = a.split('='); return { id, label: (l.join('=') || id).replace(/[\\/:*?"<>|]/g, '_') }; });
 if (!items.length) { console.log('用法: node pdf.mjs <resume_id> [resume_id=标签] ...'); process.exit(1); }
 
+// id 截断防呆:真实 resume_id 是 25 位(如 f57227747d2aP2f8fb482fb30)。传短了(常见复制漏尾)
+// 会让猎聘返回"简历信息不存在"错误页、PDF 截成 ~100KB,且不报错——这里提前拦下,别白跑一轮。
+const bad = items.filter(it => it.id.length < 20);
+if (bad.length) {
+  console.error('❌ 以下 id 长度异常(疑似被截断,真实 id 约 25 位),请用完整 id 重试:');
+  for (const it of bad) console.error(`   ${it.id} (${it.id.length}位) ← ${it.label}`);
+  process.exit(1);
+}
+
 let outDir = process.env.LIEPIN_PDF_DIR;
 if (outDir) { mkdirSync(outDir, { recursive: true }); }
 else { outDir = [path.join(os.homedir(), 'OneDrive', 'Desktop'), path.join(os.homedir(), 'Desktop')].find(existsSync) || path.join(os.homedir(), 'Desktop'); }
 const base = 'https://lpt.liepin.com/cvview/showresumedetail?resIdEncode=';
 
-const SMALL_PDF = 100 * 1024; // <100KB 大概率是错误页
+const SMALL_PDF = 150 * 1024; // <150KB 大概率是没渲染完/错误页(正常单页简历 ~300KB)
+const MARKERS = ['求职意向', '工作经历', '教育经历', '自我评价'];
+
+// 容错读 innerText:cvview→resume/detail 重定向会销毁 execution context,
+// page.evaluate 此刻会抛"context destroyed"。不能用 waitForFunction(它把这种异常当失败直接退出),
+// 必须自己轮询、吞掉中途异常,直到内容真的出现。
+async function pollResumeReady(page, id, timeoutMs = 15000) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    let txt = '';
+    try { txt = await page.evaluate(() => document.body.innerText || ''); }
+    catch { await sleep(500); continue; } // 重定向中 context 被销毁,稍后再试
+    if (/登录|登陆|扫码/.test(txt.slice(0, 120))) return 'login';
+    if (MARKERS.some(m => txt.includes(m))) return 'ok';
+    await sleep(500);
+  }
+  return 'timeout';
+}
 
 async function renderOne(page, id, out, attempt = 1) {
-  await page.goto(base + id, { waitUntil: 'networkidle2' });
-  // cvview 页会先显示"当前页面出现错误"然后 JS 重定向到 resume/detail,
-  // networkidle2 在重定向前就触发了。等 URL 变成 resume/detail 再继续。
-  try {
-    await page.waitForFunction(
-      () => window.location.href.includes('resume/detail'),
-      { timeout: 10000, polling: 300 });
-  } catch { /* 可能直接就在 detail 页了 */ }
-  // URL 到位后等 React 异步渲染出简历内容
-  try {
-    await page.waitForFunction(
-      () => ['求职意向','工作经历','教育经历','自我评价'].some(m => document.body.innerText.includes(m)),
-      { timeout: 10000, polling: 500 });
-  } catch {
-    const txt = await page.evaluate(() => document.body.innerText.slice(0, 120));
-    if (/登录|登陆|扫码/.test(txt)) { console.log(`⚠️ ${id} 疑似未登录,账号可能被踢`); return 0; }
-    console.log(`⚠️ ${id} 等不到简历内容,仍尝试截 PDF`);
-  }
-  await sleep(1500);
+  await page.goto(base + id, { waitUntil: 'networkidle2' }).catch(() => {});
+  const state = await pollResumeReady(page, id);
+  if (state === 'login') { console.log(`⚠️ ${id} 疑似未登录,账号可能被踢,先 \`liepin login\``); return 0; }
+  if (state === 'timeout') console.log(`⚠️ ${id} 15s 内没等到简历内容,仍尝试截 PDF`);
+  await sleep(2500); // 内容出现后再 settle,等图片/布局稳定(debug 实测固定等待是关键)
   await page.emulateMediaType('screen');
   await page.pdf({ path: out, format: 'A4', printBackground: true });
   const size = statSync(out).size;
-  if (size < SMALL_PDF && attempt === 1) {
-    console.log(`⚠️ ${id} PDF 仅 ${Math.round(size/1024)}KB,重试…`);
-    await sleep(2000);
-    return renderOne(page, id, out, 2);
+  if (size < SMALL_PDF && attempt < 3) {
+    console.log(`⚠️ ${id} PDF 仅 ${Math.round(size/1024)}KB(疑似没渲染完),第${attempt}次重试…`);
+    await sleep(2500);
+    return renderOne(page, id, out, attempt + 1);
   }
   return size;
 }
