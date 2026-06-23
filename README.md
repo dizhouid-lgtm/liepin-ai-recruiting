@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.png" alt="PIXBOOM 招聘 SKILL — 越用越懂你的简历筛选员" width="100%">
+</p>
+
 # Pixboom 招聘工作区
 
 [![license](https://img.shields.io/github/license/dizhouid-lgtm/pixboom-recruiting)](LICENSE)
