@@ -8,11 +8,15 @@
 [![release](https://img.shields.io/github/v/release/dizhouid-lgtm/liepin-ai-recruiting)](https://github.com/dizhouid-lgtm/liepin-ai-recruiting/releases)
 [![stars](https://img.shields.io/github/stars/dizhouid-lgtm/liepin-ai-recruiting?style=social)](https://github.com/dizhouid-lgtm/liepin-ai-recruiting/stargazers)
 
-> **一句话**：AI 替你翻完海量简历、做完粗筛，把一小叠值得细看的人送到你面前；最懂这个岗的你，只做"谁真的对"这一个判断。每看一批，JD 跟着你的反馈再磨一遍，越搜越贴近你心里那个人。
+> **我不是 HR，我是用人的那个人。**
 
-招过人的都懂两种累。一种是把筛人交给不懂这岗的人，递上来一摞看着像、聊起来全不沾边的简历。另一种是你自己埋进几百份里一份份翻，翻到第八十份眼睛就麻了，真正的好苗子没准就漏在你走神的那几屏。
+做硬件这些年我越来越确信：**一个岗位最好的招聘员，是用人端自己。** 谁天天干这活、将来要带这个人，谁就最懂要什么样的人——这事 HR 替不了。可现实里筛人偏偏卡在中间：用人端把需求交给 HR，HR 去猜画像、搜一轮、捞一摞回来，对不上再传一轮……隔一层糊一层，来回折腾，效率和准度都低。
 
-这套东西想拆的就是这个死结。分工很简单：
+这套东西就是我给自己做的：**让用人端直接下场筛人**。AI 啃掉翻简历的累活，你只做"谁真的对"这一个判断；HR 去做更该他们做的事——沟通、约面、谈薪。它出自 [Pixboom](https://pixboom.com)（我做的高端影像器材出海品牌）招聘一线的反复打磨，工具本身岗位中立、公司无关，欢迎拿去招你自己的人。
+
+但用人端自己下场，会撞上另一种累：埋进几百份简历一份份翻，翻到第八十份眼睛就发麻，真正的好苗子没准就漏在你走神的那几屏。
+
+AI 就是来扛这份累的。分工很简单：
 
 **累活归 AI。** 翻页、一份份扫简历、按硬条件先粗筛一遍、查重、攒够一批存成 PDF。这些活不靠眼光，靠的是耐心，机器不嫌烦。
 
@@ -96,12 +100,6 @@ liepin-ai-recruiting/
 
 ## 换公司用
 本流程与脚本**岗位中立、公司无关**。换公司只改 `CLAUDE.md`「关于 Pixboom」一节 + 各岗 `JD.md`。
-
-## 出处
-
-这套工作流出自 **[Pixboom](https://pixboom.com)** 招聘一线的反复打磨。
-Pixboom 是面向全球专业影视市场的**高端摄影器材品牌**，做出海 / 跨境独立站。
-工具本身岗位中立、公司无关——欢迎拿去招你自己的人。
 
 ## License
 [MIT](LICENSE) © 2026 Lessugar
