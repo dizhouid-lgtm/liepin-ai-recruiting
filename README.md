@@ -4,9 +4,9 @@
 
 # 猎聘 AI 招聘 SKILL
 
-[![license](https://img.shields.io/github/license/dizhouid-lgtm/pixboom-recruiting)](LICENSE)
-[![release](https://img.shields.io/github/v/release/dizhouid-lgtm/pixboom-recruiting)](https://github.com/dizhouid-lgtm/pixboom-recruiting/releases)
-[![stars](https://img.shields.io/github/stars/dizhouid-lgtm/pixboom-recruiting?style=social)](https://github.com/dizhouid-lgtm/pixboom-recruiting/stargazers)
+[![license](https://img.shields.io/github/license/dizhouid-lgtm/liepin-ai-recruiting)](LICENSE)
+[![release](https://img.shields.io/github/v/release/dizhouid-lgtm/liepin-ai-recruiting)](https://github.com/dizhouid-lgtm/liepin-ai-recruiting/releases)
+[![stars](https://img.shields.io/github/stars/dizhouid-lgtm/liepin-ai-recruiting?style=social)](https://github.com/dizhouid-lgtm/liepin-ai-recruiting/stargazers)
 
 > **一句话**：AI 替你翻完海量简历、做完粗筛，把一小叠值得细看的人送到你面前；最懂这个岗的你，只做"谁真的对"这一个判断。每看一批，JD 跟着你的反馈再磨一遍，越搜越贴近你心里那个人。
 
@@ -76,7 +76,7 @@ node .claude/skills/pxb-liepin/scripts/lock.mjs acquire 自检 && node .claude/s
 
 ## 文件结构
 ```
-pixboom-recruiting/
+liepin-ai-recruiting/
 ├── README.md            本文件:装环境 + 接入
 ├── CLAUDE.md            背景 + 结构(岗位中立)。Claude Code 自动读
 ├── AGENTS.md            同上镜像,给非 Claude 工具
