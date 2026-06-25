@@ -27,3 +27,4 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+**/.obsidian/   # Obsidian 本地配置(打开 skill 目录时生成),机器相关,不进仓库
