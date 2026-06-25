@@ -18,6 +18,7 @@
 !/assets/
 
 # 即便在放行目录内,这些也绝不进仓库(纵深防御)
+/_SKILL-pxb-liepin   # Obsidian 用的 SKILL junction(本地软链,别进仓库)
 *.pdf
 **/待定/
 .search-lock
