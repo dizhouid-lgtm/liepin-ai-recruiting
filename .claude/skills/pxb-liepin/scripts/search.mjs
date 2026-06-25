@@ -1,6 +1,6 @@
 // 粗筛取数——跨平台(替原 PowerShell 步骤1 整块)。
 // 一步完成:liepin search → 去掉台账里已召回的 → 新人登记「未精筛」→ 打印窄表给 agent 判断。
-// 原始 JSON 不进上下文,只输出窄表(标题/公司/年限/薪资/学历/id)。
+// 原始 JSON 不进上下文,只输出窄表(id/姓名/现职/年龄/公司/年限/期望薪资/学历/期望职位)。
 // 用法: node search.mjs <csv> "<关键词>" [--city 深圳] [--limit 40] [--experience 3-5年] [--salary 20-30K] [--degree 本科]
 import { readLedger, writeLedger } from './_csv.mjs';
 import { liepinJson } from './_liepin.mjs';
@@ -22,8 +22,8 @@ writeLedger(csv, rows);
 
 // 窄表:卡片只有这几列,判不了能力,只够砍硬约束 + 挑 ~10 进精筛
 console.log(`本次召回 ${raw.length}，新增 ${fresh.length}（其余已在台账,跳过）`);
-console.log('id\t姓名\t现职\t公司\t年限\t薪资\t学历');
+console.log('id\t姓名\t现职\t年龄\t公司\t年限\t期望薪资\t学历\t期望职位');
 for (const x of fresh) {
-  console.log([x.resume_id, x.name, x.current_title, x.company, x.experience, x.salary, x.degree]
+  console.log([x.resume_id, x.name, x.current_title, x.age, x.company, x.experience, x.salary, x.degree, x.title]
     .map(v => v ?? '').join('\t'));
 }

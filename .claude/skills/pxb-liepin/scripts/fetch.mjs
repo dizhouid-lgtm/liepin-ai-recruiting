@@ -16,11 +16,11 @@ for (let k = 0; k < ids.length; k++) {
 
   const pick = (o, ks) => Object.fromEntries(ks.map(k => [k, o[k]]));
   console.log('==== ' + id + ' ====');
-  // 精筛只取「粗筛卡片看不到」的字段——卡片已有 name/current_title/company/experience/salary/degree,不重复抓。
+  // 精筛只取「粗筛卡片看不到」的字段——卡片已有 现职/年龄/公司/年限/期望薪资/学历/期望职位,不重复抓。
   // work_history 经 liepin-cli 补丁后每段含 duty(逐段职责)= 精筛主看;self_descr 次要(自述,详略不一)。
-  // want_city/want_title=迁城/转方向信号;age/work_status/industry/education_history(学校)=判断要用、卡片没有。
+  // want_city=迁城信号;want_salary 留着供关3 判薪资-成色错配;work_status=约不约得动;industry/education_history(学校)=方向与学校。
   console.log(JSON.stringify(
-    pick(r, ['name', 'age', 'want_city', 'want_salary', 'want_title', 'industry', 'education_history',
+    pick(r, ['name', 'want_city', 'want_salary', 'industry', 'education_history',
              'work_status', 'work_history', 'self_descr']),
     null, 1));
   if (k < ids.length - 1) await sleep(jitter(4000, 11000)); // 反爬抖动 4-11s
