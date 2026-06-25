@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/banner.jpg" alt="PIXBOOM 招聘SKILL — 越用越懂你的简历筛选员" width="100%">
+  <img src="assets/banner.jpg" alt="猎聘 AI 招聘 SKILL — 越用越懂你的简历筛选员" width="100%">
 </p>
 
-# PIXBOOM 招聘SKILL
+# 猎聘 AI 招聘 SKILL
 
 [![license](https://img.shields.io/github/license/dizhouid-lgtm/pixboom-recruiting)](LICENSE)
 [![release](https://img.shields.io/github/v/release/dizhouid-lgtm/pixboom-recruiting)](https://github.com/dizhouid-lgtm/pixboom-recruiting/releases)
@@ -66,7 +66,7 @@ node .claude/skills/pxb-liepin/scripts/lock.mjs acquire 自检 && node .claude/s
 
 ## 快速开始：第一次搜人
 你只需开口,**JD、建文件夹、登录都交给 AI 引导**:
-1. 告诉 AI:「按 `pxb-liepin` 给 \<岗位\> 搜人」——有现成 JD 就直接贴给它;**没有也没关系,AI 会多轮问你把 JD 补全**(做什么、最看重啥、预算、城市、招几个…),写进该岗 `JD.md`,你确认后才开搜。
+1. 告诉 AI:「按 `pxb-liepin` 给 \<岗位\> 搜人」——有现成 JD 就直接贴给它;**没有也没关系,开搜前 AI 会先跟你把人员画像聊清**:研究目标公司(对标/竞品/上下游)、读你给的样板简历、问清"哪种人看着像、其实不对",连同硬约束(预算/城市/年龄/招几个)一起写进该岗 `JD.md`,你确认后才开搜。
 2. 首次/换机:AI 会打开猎聘登录页,**你扫码**即可(不用敲命令)。
 3. 然后它自动跑:抢锁 → 搜一页登台账 → 粗筛挑 ~10 → 精筛按 JD 判 → **轮间报进度**(每轮约 10–20 分钟)→ 攒够一批出 PDF 到 `待定/` → 你复核(说清谁合适/为什么、谁不合适/为什么)→ 入池 + 回写 JD,下一轮更准。
 
@@ -86,6 +86,7 @@ pixboom-recruiting/
 │   └── liepin-cli/      猎聘命令参考
 └── _共享/
     ├── 搜索队列.md       多对话/多岗排队防互顶
+    ├── 公司档案.md       目标公司研究底料(全岗共用)
     └── 模板/            新岗位从这里复制三件
 ```
 治理原则:**判断只看各岗 `JD.md`;通用背景/结构在 `CLAUDE.md`;作业程序在 `pxb-liepin` skill;机械脚本在 `scripts/`。**
@@ -97,7 +98,7 @@ pixboom-recruiting/
 本流程与脚本**岗位中立、公司无关**。换公司只改 `CLAUDE.md`「关于 Pixboom」一节 + 各岗 `JD.md`。
 
 ## License
-[MIT](LICENSE) © 2026 Pixboom
+[MIT](LICENSE) © 2026 Lessugar
 
 ---
 
