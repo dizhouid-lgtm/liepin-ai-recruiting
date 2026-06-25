@@ -16,10 +16,12 @@ for (let k = 0; k < ids.length; k++) {
 
   const pick = (o, ks) => Object.fromEntries(ks.map(k => [k, o[k]]));
   console.log('==== ' + id + ' ====');
-  // 字段须与 liepin resume 实际输出对齐:有 city/current_company/education/want_salary/work_status/
-  // want_title/work_history/self_descr;没有 experience(经验在 work_history 里)。
+  // 字段对齐 liepin resume 实际输出(另有 sex/online_status/skills/languages/want_industry/user_id,价值低不取)。
+  // ⚠️ work_history 只是时间线(公司/岗位/时长),无逐段职责——**实做细节全在 self_descr**(候选人自述,详略不一)。
+  // want_city/want_title=期望去向(迁城/转方向信号);age/experience/education_history/industry=硬约束与方向判断要用。
   console.log(JSON.stringify(
-    pick(r, ['name', 'city', 'current_company', 'education', 'want_salary', 'work_status', 'want_title', 'work_history', 'self_descr']),
+    pick(r, ['name', 'age', 'city', 'want_city', 'current_company', 'industry', 'education', 'education_history',
+             'experience', 'want_salary', 'work_status', 'title', 'want_title', 'work_history', 'self_descr']),
     null, 1));
   if (k < ids.length - 1) await sleep(jitter(4000, 11000)); // 反爬抖动 4-11s
 }
