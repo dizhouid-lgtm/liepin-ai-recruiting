@@ -18,7 +18,9 @@
 !/assets/
 
 # 即便在放行目录内,这些也绝不进仓库(纵深防御)
-/_SKILL-pxb-liepin   # Obsidian 用的 SKILL junction(本地软链,别进仓库)
+# Obsidian:本地软链(开 skill 目录用)+ 本地配置,都别进仓库
+/_SKILL-pxb-liepin
+**/.obsidian/
 *.pdf
 **/待定/
 .search-lock
@@ -27,4 +29,3 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
-**/.obsidian/   # Obsidian 本地配置(打开 skill 目录时生成),机器相关,不进仓库
