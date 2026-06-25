@@ -1,0 +1,34 @@
+<svg viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'PingFang SC','Microsoft YaHei','Hiragino Sans GB','Noto Sans CJK SC',sans-serif">
+  <title>猎聘 AI 招聘技能</title>
+  <desc>用人端自己下场筛人，AI 啃粗筛，你只做判断</desc>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 2L7 5L2 8" fill="none" stroke="#4b6075" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="360" fill="#0e1726"/>
+
+  <g fill="#34d399">
+    <g opacity="0.30"><circle cx="880" cy="86" r="6"/><circle cx="910" cy="86" r="6"/><circle cx="940" cy="86" r="6"/><circle cx="970" cy="86" r="6"/><circle cx="1000" cy="86" r="6"/><circle cx="1030" cy="86" r="6"/><circle cx="1060" cy="86" r="6"/><circle cx="1090" cy="86" r="6"/><circle cx="1120" cy="86" r="6"/></g>
+    <g opacity="0.45"><circle cx="910" cy="132" r="6"/><circle cx="940" cy="132" r="6"/><circle cx="970" cy="132" r="6"/><circle cx="1000" cy="132" r="6"/><circle cx="1030" cy="132" r="6"/><circle cx="1060" cy="132" r="6"/><circle cx="1090" cy="132" r="6"/></g>
+    <g opacity="0.62"><circle cx="940" cy="178" r="6"/><circle cx="970" cy="178" r="6"/><circle cx="1000" cy="178" r="6"/><circle cx="1030" cy="178" r="6"/><circle cx="1060" cy="178" r="6"/></g>
+    <g opacity="0.80"><circle cx="970" cy="224" r="6"/><circle cx="1000" cy="224" r="6"/><circle cx="1030" cy="224" r="6"/></g>
+    <circle cx="1000" cy="272" r="11" fill="#5eead4"/>
+  </g>
+
+  <rect x="80" y="84" width="56" height="6" rx="3" fill="#34d399"/>
+  <text x="78" y="164" font-size="70" font-weight="800" fill="#f1f5f9">猎聘 AI 招聘技能</text>
+  <text x="80" y="210" font-size="26" fill="#93a4b8">用人端自己下场 · AI 啃粗筛，你只做判断</text>
+
+  <g>
+    <rect x="80" y="262" width="128" height="44" rx="22" fill="#16233a" stroke="#34d399" stroke-width="1.5"/>
+    <text x="144" y="290" font-size="22" fill="#dbe4ee" text-anchor="middle">聊清要谁</text>
+    <line x1="214" y1="284" x2="232" y2="284" stroke="#4b6075" stroke-width="1.5" marker-end="url(#ar)"/>
+    <rect x="240" y="262" width="232" height="44" rx="22" fill="#16233a" stroke="#34d399" stroke-width="1.5"/>
+    <text x="356" y="290" font-size="22" fill="#dbe4ee" text-anchor="middle">每轮十来分钟过上百份</text>
+    <line x1="478" y1="284" x2="496" y2="284" stroke="#4b6075" stroke-width="1.5" marker-end="url(#ar)"/>
+    <rect x="504" y="262" width="180" height="44" rx="22" fill="#16233a" stroke="#34d399" stroke-width="1.5"/>
+    <text x="594" y="290" font-size="22" fill="#dbe4ee" text-anchor="middle">多轮逼近画像</text>
+  </g>
+</svg>

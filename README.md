@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.jpg" alt="猎聘 AI 招聘 SKILL — 越用越懂你的简历筛选员" width="100%">
+  <img src="assets/banner.svg" alt="猎聘 AI 招聘技能 — 用人端自己下场筛人" width="100%">
 </p>
 
 # 猎聘 AI 招聘 SKILL
@@ -8,7 +8,7 @@
 [![release](https://img.shields.io/github/v/release/dizhouid-lgtm/liepin-ai-recruiting)](https://github.com/dizhouid-lgtm/liepin-ai-recruiting/releases)
 [![stars](https://img.shields.io/github/stars/dizhouid-lgtm/liepin-ai-recruiting?style=social)](https://github.com/dizhouid-lgtm/liepin-ai-recruiting/stargazers)
 
-> **我不是 HR，我是用人的那个人。**
+> 我的部门缺人已经缺得不行了，每天还看着 HR 慢慢悠悠推过来一两份简历，还都是垃圾，简直太无力了。
 
 做硬件这些年我越来越觉得：最好的招聘员就是用人端自己。谁天天干这活、将来带这个人，谁最懂要谁，HR 替不了。可筛人偏偏卡在中间——需求交给 HR，他去猜、去搜、捞一摞回来，对不上再来一轮，隔一层糊一层。
 
