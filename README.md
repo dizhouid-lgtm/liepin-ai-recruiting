@@ -97,6 +97,12 @@ pixboom-recruiting/
 ## 换公司用
 本流程与脚本**岗位中立、公司无关**。换公司只改 `CLAUDE.md`「关于 Pixboom」一节 + 各岗 `JD.md`。
 
+## 出处
+
+这套工作流出自 **[Pixboom](https://pixboom.com)** 招聘一线的反复打磨。
+Pixboom 是面向全球专业影视市场的**高端摄影器材品牌**，做出海 / 跨境独立站。
+工具本身岗位中立、公司无关——欢迎拿去招你自己的人。
+
 ## License
 [MIT](LICENSE) © 2026 Lessugar
 
