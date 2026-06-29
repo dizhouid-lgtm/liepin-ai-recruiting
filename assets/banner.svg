@@ -1,6 +1,6 @@
 <svg viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'PingFang SC','Microsoft YaHei','Hiragino Sans GB','Noto Sans CJK SC',sans-serif">
-  <title>猎聘 AI 招聘技能</title>
-  <desc>用人端自己下场筛人，AI 啃粗筛，你只做判断</desc>
+  <title>猎聘 AI LOOP 招聘 SKILL</title>
+  <desc>LOOP 自动化筛简历：你打分、AI 迭代，半小时从 1000 份里捞出最对口的那一个</desc>
   <defs>
     <marker id="ar" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M2 2L7 5L2 8" fill="none" stroke="#4b6075" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -18,17 +18,17 @@
   </g>
 
   <rect x="80" y="84" width="56" height="6" rx="3" fill="#34d399"/>
-  <text x="78" y="164" font-size="70" font-weight="800" fill="#f1f5f9">猎聘 AI 招聘技能</text>
-  <text x="80" y="210" font-size="26" fill="#93a4b8">用人端自己下场 · AI 啃粗筛，你只做判断</text>
+  <text x="78" y="160" font-size="60" font-weight="800" fill="#f1f5f9">猎聘 AI <tspan fill="#5eead4">LOOP</tspan> 招聘 SKILL</text>
+  <text x="80" y="206" font-size="26" fill="#93a4b8">半小时，从 1000 份简历里捞出最对口的那一个</text>
 
   <g>
     <rect x="80" y="262" width="128" height="44" rx="22" fill="#16233a" stroke="#34d399" stroke-width="1.5"/>
     <text x="144" y="290" font-size="22" fill="#dbe4ee" text-anchor="middle">聊清要谁</text>
     <line x1="214" y1="284" x2="232" y2="284" stroke="#4b6075" stroke-width="1.5" marker-end="url(#ar)"/>
-    <rect x="240" y="262" width="232" height="44" rx="22" fill="#16233a" stroke="#34d399" stroke-width="1.5"/>
-    <text x="356" y="290" font-size="22" fill="#dbe4ee" text-anchor="middle">每轮十来分钟过上百份</text>
-    <line x1="478" y1="284" x2="496" y2="284" stroke="#4b6075" stroke-width="1.5" marker-end="url(#ar)"/>
-    <rect x="504" y="262" width="180" height="44" rx="22" fill="#16233a" stroke="#34d399" stroke-width="1.5"/>
-    <text x="594" y="290" font-size="22" fill="#dbe4ee" text-anchor="middle">多轮逼近画像</text>
+    <rect x="240" y="262" width="200" height="44" rx="22" fill="#16233a" stroke="#34d399" stroke-width="1.5"/>
+    <text x="340" y="290" font-size="22" fill="#dbe4ee" text-anchor="middle">你打分 · AI 迭代</text>
+    <line x1="446" y1="284" x2="464" y2="284" stroke="#4b6075" stroke-width="1.5" marker-end="url(#ar)"/>
+    <rect x="472" y="262" width="160" height="44" rx="22" fill="#16233a" stroke="#34d399" stroke-width="1.5"/>
+    <text x="552" y="290" font-size="22" fill="#dbe4ee" text-anchor="middle">每轮越筛越准</text>
   </g>
 </svg>

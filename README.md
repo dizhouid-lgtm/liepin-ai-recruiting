@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="猎聘 AI 招聘技能 — 用人端自己下场筛人" width="100%">
+  <img src="assets/banner.svg" alt="猎聘 AI LOOP 招聘 SKILL — 你打分 AI 迭代，半小时从 1000 份里捞出最对口的那一个" width="100%">
 </p>
 
-# 猎聘 AI 招聘 SKILL
+# 猎聘 AI LOOP 招聘 SKILL
 
-[![license](https://img.shields.io/github/license/dizhouid-lgtm/liepin-ai-recruiting)](LICENSE)
-[![release](https://img.shields.io/github/v/release/dizhouid-lgtm/liepin-ai-recruiting)](https://github.com/dizhouid-lgtm/liepin-ai-recruiting/releases)
-[![stars](https://img.shields.io/github/stars/dizhouid-lgtm/liepin-ai-recruiting?style=social)](https://github.com/dizhouid-lgtm/liepin-ai-recruiting/stargazers)
+[![license](https://img.shields.io/github/license/dizhouid-lgtm/liepin-ai-loop-recruiting)](LICENSE)
+[![release](https://img.shields.io/github/v/release/dizhouid-lgtm/liepin-ai-loop-recruiting)](https://github.com/dizhouid-lgtm/liepin-ai-loop-recruiting/releases)
+[![stars](https://img.shields.io/github/stars/dizhouid-lgtm/liepin-ai-loop-recruiting?style=social)](https://github.com/dizhouid-lgtm/liepin-ai-loop-recruiting/stargazers)
 
 > 我的部门缺人已经缺得不行了，每天还看着 HR 慢慢悠悠推过来一两份简历，还都是**，简直太无力了。
 
@@ -74,7 +74,7 @@ node .claude/skills/pxb-liepin/scripts/lock.mjs acquire 自检 && node .claude/s
 
 ## 文件结构
 ```
-liepin-ai-recruiting/
+liepin-ai-loop-recruiting/
 ├── README.md            本文件:装环境 + 接入
 ├── CLAUDE.md            背景 + 结构(岗位中立)。Claude Code 自动读
 ├── AGENTS.md            同上镜像,给非 Claude 工具
