@@ -1,5 +1,5 @@
 // 去重台账增删改查——跨平台(替原 PowerShell 的 Import-Csv/Export-Csv 块)。
-// 台账只为查重:resume_id,status;状态六值 未精筛/粗筛不合适/精筛不合适/待提报/候补/入选。
+// 台账只为查重:resume_id,status;状态五值 未精筛/粗筛不合适/精筛不合适/待定/入选。
 // 用法:
 //   node dedup.mjs seen  <csv>                  打印已收录的 resume_id(每行一个),供搜索去重
 //   node dedup.mjs add   <csv> <id...>          新 id 登记为「未精筛」(已存在的跳过),整表重写
@@ -10,7 +10,7 @@ import { readLedger, writeLedger } from './_csv.mjs';
 
 const [cmd, csv, ...rest] = process.argv.slice(2);
 if (!cmd || !csv) { console.error('用法见脚本头注释'); process.exit(2); }
-const STATUSES = ['未精筛', '粗筛不合适', '精筛不合适', '待提报', '候补', '入选'];
+const STATUSES = ['未精筛', '粗筛不合适', '精筛不合适', '待定', '入选'];
 
 if (cmd === 'seen') {
   for (const r of readLedger(csv)) console.log(r.resume_id);
@@ -43,7 +43,7 @@ if (cmd === 'seen') {
   const c = {};
   for (const r of rows) c[r.status] = (c[r.status] || 0) + 1;
   for (const s of STATUSES) console.log(`${s}: ${c[s] || 0}`);
-  const fine = (c['精筛不合适'] || 0) + (c['待提报'] || 0) + (c['候补'] || 0) + (c['入选'] || 0);
+  const fine = (c['精筛不合适'] || 0) + (c['待定'] || 0) + (c['入选'] || 0);
   console.log(`未精筛:精筛 = ${(c['未精筛'] || 0)}:${fine}${fine ? ' (≈' + ((c['未精筛'] || 0) / fine).toFixed(1) + ':1)' : ''}`);
 
 } else { console.error('未知命令: ' + cmd); process.exit(2); }
